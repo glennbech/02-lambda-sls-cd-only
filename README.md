@@ -11,14 +11,8 @@ miljø.
 
 - Dere trenger en GitHub Konto
 - Lag en _fork_ av dette repositoriet inn i din egen GitHub konto
-
-![Alt text](img/fork.png  "a title")
-
-### Sjekk ut Cloud 9 miljøet ditt i AWS og bli kjent med det
-
 * URL for innlogging er https://244530008913.signin.aws.amazon.com/console
 * Brukernavnet og passordet er gitt i klasserommet
-
 * Fra hovedmenyen, søk etter tjenesten "cloud9"
 
 ![Alt text](img/11.png  "a title")
@@ -29,25 +23,10 @@ miljø.
 
 Du må nå vente litt mens Cloud 9 starter
 
-* Hvis du velger "9" ikonet på øverst til venstre i hovedmenyen vil du se "AWS Explorer". Naviger gjerne litt rundt I AWS Miljøet for å bli kjent.
-* Blir kjent med IDE, naviger rundt.
-
 ![Alt text](img/cloud9.png  "a title")
 
 Start en ny terminal i Cloud 9 ved å trykke (+) symbolet på tabbene
 ![Alt text](img/newtab.png  "a title")
-
-Kjør denne kommandoen for å verifisere at Java 11 er installert
-
-```shell
-java -version
-```
-Du skal få
-```
-openjdk 11.0.14.1 2022-02-08 LTS
-OpenJDK Runtime Environment Corretto-11.0.14.10.1 (build 11.0.14.1+10-LTS)
-OpenJDK 64-Bit Server VM Corretto-11.0.14.10.1 (build 11.0.14.1+10-LTS, mixed mode)
-```
 
 ### Installer Maven i Cloud 9
 
@@ -110,11 +89,13 @@ cd sentiment-demo/
 sam build --use-container
 ```
 
+Dette vil ta litt tid første gangen du gjør operasjonen. 
 Du kan teste funksjonen uten å deploye den til AWS ved å kjøre kommandoen 
 
 ```shell
 sam local invoke -e event.json 
 ```
+
 
 Event.json filen inneholder en request, nøyaktig slik API Gateway sender den til "handler" metoden/funksjonen. 
 Du skal få en respons omtrent som denne 
@@ -132,7 +113,7 @@ REPORT RequestId: d37e4849-b175-4fa6-aa4b-0031af6f41a0  Init Duration: 0.42 ms  
 * NB! Du må endre Stack name til noe unikt. Legg på ditt brukeranvn eller noe i slutten av navnet, for eksempel; ```--stack-name sam-sentiment-ola```
 
 ```shell
- sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-sentiment-<noe unikt, feks brukernavnet ditt i AWS kontoen> --s3-bucket lambda-deployments-gb --capabilities CAPABILITY_IAM --region us-east-1  --parameter-overrides "ParameterKey=UnleashToken,ParameterValue=1234"
+sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-sentiment-lambda-deployments-glennbech --s3-bucket lambda-deployments-glennbech --capabilities CAPABILITY_IAM --region eu-west-1
 ```
 
 Du kan deretter bruke for eksempel postman eller Curl til å teste ut tjenesten. <URL> får dere etter SAM deploy. 
