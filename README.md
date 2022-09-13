@@ -75,7 +75,25 @@ REPORT RequestId: d37e4849-b175-4fa6-aa4b-0031af6f41a0  Init Duration: 0.42 ms  
 * NB! Du må endre s3-prefix parameter name til noe unikt. Legg på ditt brukeranvn eller noe i slutten av navnet, for eksempel; ```--stack-name sam-sentiment-ola```
 
 ```shell
-sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-sentiment-lambda-deployments-glennbech --s3-bucket lambda-deployments-gb  --s3-prefix glennb --capabilities CAPABILITY_IAM --region eu-west-1
+sam deploy --guided 
+```
+
+Dere får da et interaktivt UI, og må gjøre følgende valg, bytt ut "glennbech" med ditt egent navn 
+
+```text
+     Setting default arguments for 'sam deploy'
+        =========================================
+        Stack Name [sam-sentiment-glennbech]: sam-sentiment-<ditt navn> 
+        AWS Region [eu-west-1]: eu-west-1
+        Parameter UnleashToken [12345]: <enter>
+        #Shows you resources changes to be deployed and require a 'Y' to initiate deploy
+        Confirm changes before deploy [Y/n]: Y
+        #SAM needs permission to be able to create roles to connect to the resources in your template
+        Allow SAM CLI IAM role creation [Y/n]: Y
+        SentimentFunction may not have authorization defined, Is this okay? [y/N]: Y
+        Save arguments to configuration file [Y/n]: Y
+        SAM configuration file [samconfig.toml]: <enter>
+        SAM configuration environment [default]: <enter> 
 ```
 
 Du kan bruke for eksempel postman eller Curl til å teste ut tjenesten. <URL> får dere etter SAM deploy. 
@@ -90,3 +108,9 @@ curl -X POST \
 
 Men... dette er jo ikke veldig "DevOps" og vil ikke fungere i et større team. Vi trenger både CI og CD for å kunne jobbe 
 effektivt sammen om denne funksjonen.
+
+## Ekstraoppgaver
+
+* Bruk AWS lambda brukergrensesnitet til å lage en Lambda i et valgfritt språk 
+* Klarer du å lage en Javabasert Lambda ? 
+
